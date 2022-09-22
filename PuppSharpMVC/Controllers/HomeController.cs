@@ -34,6 +34,7 @@ namespace PuppSharpMVC.Controllers
 		public async Task<IActionResult> IndexAsync(IFormFile file)
 		{
 			string url = Startup.ApiUrl;
+			string message = "";
 			using (var httpClient = new HttpClient())
 			{
 				using (var form = new MultipartFormDataContent())
@@ -44,7 +45,7 @@ namespace PuppSharpMVC.Controllers
 						{
 							using (var fileContent = new ByteArrayContent(await streamContent.ReadAsByteArrayAsync()))
 							{
-								 fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+								fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
 								form.Add(fileContent, "file", file.FileName);
 								HttpResponseMessage response = await httpClient.PutAsync(url, form);
 								if (response.IsSuccessStatusCode)
@@ -53,12 +54,16 @@ namespace PuppSharpMVC.Controllers
 									var contentStream = await content.ReadAsStreamAsync();
 									return File(contentStream, "application/pdf", "converted.pdf");
 								}
+								else
+								{
+									message = response.StatusCode.ToString();
+								}
 							}
 						}
 					}
 				}
 			}
-			return View();
+			return View(message);
 		}
 
 		public IActionResult Privacy()
