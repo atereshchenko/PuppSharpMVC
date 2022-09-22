@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-lg">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Добавление файла</h3>
+            </div>
+            <form role="form" asp-action="Index" asp-controller="Home" method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputFile">Выберите файл</label>
+                        <input type="file" class="form-control-file" name="file" id="inputFile" accept="application/html" /><br>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Загрузить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

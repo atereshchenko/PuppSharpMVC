@@ -1,2 +1,2 @@
-# PuppSharpMVC
-PuppSharpMVC
+# PuppSharp
+example of using Puppeteer Sharp
